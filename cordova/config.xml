@@ -10,5 +10,4 @@
         <icon src="resources/android/drawable-xxhdpi/ic_launcher.png" density="xxhdpi" />
         <icon src="resources/android/drawable-xxxhdpi/ic_launcher.png" density="xxxhdpi" />
     </platform>
-	<preference name="EnableDeveloperConsole" value="$IS_DEBUG" />
 </widget>
