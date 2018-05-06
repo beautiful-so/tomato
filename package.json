@@ -2,7 +2,7 @@
   "name": "tomato",
   "version": "0.1.0",
   "main": "src/app.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "test": "eslint .",
     "start": "tabris serve"
