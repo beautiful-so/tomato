@@ -1,6 +1,7 @@
-const {TextView, NavigationView, app, ui} = require('tabris');
+const {TextView, ImageView, app, ui} = require('tabris');
 
-const Nav = require('./nav');
+const icon = require('./img/icon');
+const Nav = require('./nav/index');
 const Class = require('./class');
 const Board = require('./board');
 const Auth = require('./auth');
@@ -14,13 +15,13 @@ app.route = (path, cache) => {
 	if(path[0] == "auth"){
 		el = new Auth({left: 0, top: 0, right: 0, bottom: 0}).appendTo(ui.contentView);
 	}else if(path[0] == "class"){
-		el = new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#f00'}).appendTo(ui.contentView);
+		// el = new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#f00'}).appendTo(ui.contentView);
 	}else if(path[0] == "board"){
 		el = new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#ff0'}).appendTo(ui.contentView);
-	}else{
+	}else if(path[0] == "nav"){
 		el = new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#fff'}).appendTo(ui.contentView);
 	}
-	   
+
 	if(!cache) app.events.push({path : path, element : el});
 };
 
@@ -72,5 +73,16 @@ app.on('backNavigation', (event) => {
 		}
 	}
 });
+
+new ImageView({
+	left: 10, top: 10, width: 50, height: 50,
+	image: {
+		src : icon.menu
+	},
+	background : "#000000",
+	highlightOnTouch: true,
+}).on('tap', () => {
+  app.route("nav");
+}).appendTo(ui.contentView);
 
 app.route();

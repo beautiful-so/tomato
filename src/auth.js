@@ -9,18 +9,17 @@ module.exports = class Auth extends Composite {
 	}
 	
 
-	
 	_createUI() {
 		this.append(
 			new WebView({
 				left: 0, top: 0, right: 0, bottom: 0,
-				url: 'http://211.245.90.248:8080/parents.html?1a21311'
+				url: 'http://211.245.90.248:8080/index.html?1a2132a11'
 			}).on({
 				"message" : function(event) {
 					console.log(event);
 				},
 				'load' : function(){
-					this.postMessage("testasdasd", "*");
+					this.postMessage(require('base64/lecture001'), "*");
 					// if(e.url.indexOf("mloginkey") > 0){
 					// 	this.apply({width: 0, height:0});
 					// 	this.set({
