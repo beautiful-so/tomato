@@ -4,11 +4,11 @@
 	<description>Example Tabris.js App</description>
 	<author email="sungu.che@icloud.com">sungu.che</author>
     <platform name="android">
-        <icon src="src/img/logo.png" density="mdpi" />
-        <icon src="src/img/logo.png" density="hdpi" />
-        <icon src="src/img/logo.png" density="xhdpi" />
-        <icon src="src/img/logo.png" density="xxhdpi" />
-        <icon src="src/img/logo.png" density="xxxhdpi" />
+        <icon src="img/logo.png" density="mdpi" />
+        <icon src="img/logo.png" density="hdpi" />
+        <icon src="img/logo.png" density="xhdpi" />
+        <icon src="img/logo.png" density="xxhdpi" />
+        <icon src="img/logo.png" density="xxxhdpi" />
     </platform>
 	<preference name="EnableDeveloperConsole" value="$IS_DEBUG" />
 </widget>
