@@ -11,4 +11,6 @@
         <icon src="img/logo.png" density="xxxhdpi" />
     </platform>
     <preference name="EnableDeveloperConsole" value="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </widget>
