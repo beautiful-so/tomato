@@ -1,17 +1,16 @@
-const {ImageView, fs, ui} = require('tabris');
+const {Video, ImageView, fs, ui} = require('tabris');
 
-let file = fs.cacheDir + '/test.png';
+let file = fs.filesDir + '/test.mp4';
 
-let imageView = new ImageView({
-  centerX: 0, centerY: 0, width: 400, height: 200,
-  background: '#aaaaaa'
+let video = new Video({
+  left: 0, top: 0, right: 0, bottom: 0,controlsVisible: true
 }).appendTo(ui.contentView);
 
-fetch('https://s3.amazonaws.com/ceblog/wp-content/uploads/2012/04/dummyimage.jpg')
+fetch("http://211.245.90.248:3000/449997485_001.mp4")
   .then(res => res.arrayBuffer())
   .then(data => fs.writeFile(file, data))
-  .then(() => imageView.image = file)
+  .then(() => video.url = file)
   .then(() => {
-	console.log('image:', fs.readDir(fs.cacheDir) );
+	console.log('image:', file );
   })
   .catch(err => console.error(err));
