@@ -10,5 +10,5 @@
         <icon src="img/logo.png" density="xxhdpi" />
         <icon src="img/logo.png" density="xxxhdpi" />
     </platform>
-    <preference name="EnableDeveloperConsole" value="true" />
+	<preference name="EnableDeveloperConsole" value="$IS_DEBUG" />
 </widget>
