@@ -1,51 +1,23 @@
-const {NavigationView, TextView, WebView, app, ui} = require('tabris');
-
-const icon = require('./img/icon');
-const Nav = require('./nav/index');
-const Class = require('./class');
-const Board = require('./board');
-const Auth = require('./auth');
-
+const {WebView, TextView, app, ui} = require('tabris');
 app.events = [];
 
-app.route = (path, cache) => {
-	var el;
-	path = typeof path == "string" ? path.split("/") : 0;
-
-	if(path[0] == "auth"){
-		el = new Auth({left: 0, top: 0, right: 0, bottom: 0}).appendTo(ui.contentView);
-	}else if(path[0] == "class"){
-		// el = new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#f00'}).appendTo(ui.contentView);
-	}else if(path[0] == "board"){
-		el = new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#ff0'}).appendTo(ui.contentView);
-	}else if(path[0] == "nav"){
-		 new Nav({left: 0, top: 0, right: 0, bottom: 0, background: '#fff'}).appendTo(ui.contentView);
-	 }
-
-	if(!cache) app.events.push({path : path, element : el});
+app.route = function(url){
+	app.events.push(url);
+	app.webView.url = url;
 };
 
 app.off = (len) => {
-	let obj = app.events[len];
-	obj.path = typeof obj.path == "string" ? obj.path.split("/") : [0];
-	console.log(obj);
-	obj.element.dispose();
+	let obj = app.events[len-1];
+	app.webView.url = obj;
+	
 	app.events.pop();
 };
 
-app.request = (path) => {
-	switch(path){
-		case "" :
-			break;
-		default : 
-			break;
-	}
-};
 
 app.on('backNavigation', (event) => {
 	var typeof_back = typeof app.backNavigation == "undefined";
 	var len = app.events.length - 1;
-	
+
 	if(len > 0){
 		event.preventDefault();
 		app.off(len);
@@ -75,34 +47,15 @@ app.on('backNavigation', (event) => {
 	}
 });
 
-
-
-
-new TextView({
-	left: 15, top: 15, width: 60, height: 60,
-	highlightOnTouch: true,
-}).on('tap', () => {
-  app.route("nav");
+app.webView = new WebView({
+  left: 0, top: 0, right: 0, bottom: 0, url : "http://mtomato.neclass.com"
+}).on("navigate",function(e){
+	
+	var len = app.events.length - 1;
+	if(app.events[len] != e.url){
+		app.route(e.url);
+		
+	}
 }).appendTo(ui.contentView);
 
-app.Nav = new NavigationView({
-	left: 0, top: 0, right: 0, bottom: 0,
-	drawerActionVisible: true,
-	background : "#000000"
-}).appendTo(ui.contentView);
-
-
-
-ui.drawer.append(
-	new WebView({
-		left: 15, top: 15, width: 250, height: 250,
-		html : icon.logo
-	}).on('tap', () => {
-	  app.route("nav");
-	})
-);
-
-ui.drawer.enabled = true;
-
-app.route();
-
+app.route("http://mtomato.neclass.com/");
