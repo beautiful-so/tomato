@@ -57,5 +57,3 @@ app.webView = new WebView({
 		
 	}
 }).appendTo(ui.contentView);
-
-app.route("http://mtomato.neclass.com/");
